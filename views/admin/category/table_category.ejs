@@ -17,7 +17,8 @@
             <th>Action</th>
             </tr>
           </thead>
-          <% for(let i =0; i<category.length; i++){ %>
+          <tbody>
+            <% for(let i =0; i<category.length; i++){ %>
               <tr>
                 <td><%= i + 1 %></td>
                 <td><%= category[i].name %></td>
@@ -33,6 +34,7 @@
                 </td>
               </tr>
           <% } %>
+          </tbody>
         </table>
       </div>
     </div>
