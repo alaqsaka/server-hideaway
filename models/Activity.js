@@ -6,8 +6,8 @@ const activitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  qty: {
-    type: Number,
+  type: {
+    type: String,
     required: true,
   },
   imageUrl: {
@@ -19,8 +19,8 @@ const activitySchema = new mongoose.Schema({
   },
   itemId: {
     type: ObjectId,
-    ref: Item,
+    ref: "Item",
   },
 });
 
-module.exports = mongoose.model("Activity", featureSchema);
+module.exports = mongoose.model("Activity", activitySchema);
