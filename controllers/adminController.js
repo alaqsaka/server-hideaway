@@ -12,14 +12,17 @@ const bcrypt = require("bcryptjs");
 module.exports = {
   viewSignin: async (req, res) => {
     try {
-      const category = await Category.find();
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-      res.render("index", {
-        alert,
-        title: "Staycation | Login",
-      });
+      if (req.session.user == null || req.session.user == undefined) {
+        res.render("index", {
+          alert,
+          title: "Staycation | Login",
+        });
+      } else {
+        res.redirect("/admin/dashboard");
+      }
     } catch (error) {
       res.redirect("/admin/signin");
     }
@@ -42,6 +45,12 @@ module.exports = {
         req.flash("alertStatus", "danger");
         res.redirect("/admin/signin");
       }
+
+      // Membuat autentikasi supaya user engga bisa kembali ke /admin/signin , saat sudah login
+      req.session.user = {
+        id: user.id,
+        username: user.username,
+      };
 
       res.redirect("/admin/dashboard");
     } catch (error) {
