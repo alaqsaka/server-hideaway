@@ -4,8 +4,10 @@ const Item = require("../models/Item");
 const Image = require("../models/Image");
 const Feature = require("../models/Feature");
 const Activity = require("../models/Activity");
+const Users = require("../models/Users");
 const fs = require("fs-extra");
 const path = require("path");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
   viewSignin: async (req, res) => {
@@ -18,6 +20,30 @@ module.exports = {
         alert,
         title: "Staycation | Login",
       });
+    } catch (error) {
+      res.redirect("/admin/signin");
+    }
+  },
+  actionSignin: async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      // mengecek apakah username ada di database atau enggga
+      const user = await Users.findOne({ username: username });
+      if (!user) {
+        req.flash("alertMessage", "Username tidak dapat ditemukan");
+        req.flash("alertStatus", "danger");
+        res.redirect("/admin/signin");
+      }
+      // Mengecek password
+      const isPassword = await bcrypt.compare(password, user.password);
+      // jika password salah atau tidak cocok
+      if (!isPassword) {
+        req.flash("alertMessage", "Password salah");
+        req.flash("alertStatus", "danger");
+        res.redirect("/admin/signin");
+      }
+
+      res.redirect("/admin/dashboard");
     } catch (error) {
       res.redirect("/admin/signin");
     }
