@@ -1,2 +1,3 @@
 # server-hideaway
-Repo berisi backend dari website Hideaway
+Repository for back-end and API for Hideaway website.
+
