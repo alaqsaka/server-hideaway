@@ -63,13 +63,17 @@ module.exports = {
     req.session.destroy();
     res.redirect("/admin/signin");
   },
-  viewDashboard: (req, res) => {
+  viewDashboard: async (req, res) => {
     try {
+      const member = await Member.find();
       res.render("admin/dashboard/view_dashboard.ejs", {
         title: "Staycation | Dashboard",
         user: req.session.user,
+        member,
       });
-    } catch (error) {}
+    } catch (error) {
+      res.redirect("/admin/dashboard");
+    }
   },
   viewCategory: async (req, res) => {
     try {
