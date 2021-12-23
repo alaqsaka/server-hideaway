@@ -3,6 +3,8 @@ const Treasure = require("../models/Activity");
 const Traveler = require("../models/Booking");
 const Category = require("../models/Category");
 const Bank = require("../models/Bank");
+const Member = require("../models/Member");
+const Booking = require("../models/Booking");
 
 module.exports = {
   landingPage: async (req, res) => {
@@ -139,7 +141,50 @@ module.exports = {
     ) {
       res.status(404).json({ message: "Lengkapi semua field" });
     } else {
-      res.status(201).json({ message: "Success booking" });
+      const item = await Item.findOne({ _id: idItem });
+
+      if (!item) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+
+      item.sumBooking += 1;
+
+      await item.save();
+
+      let total = item.price * duration;
+      let tax = total * 0.1;
+
+      const invoice = Math.floor(1000000 + Math.random() * 9000000);
+
+      const member = await Member.create({
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+      });
+
+      const newBooking = {
+        invoice,
+        bookingStartDate,
+        bookingEndDate,
+        total: (total += tax),
+        itemId: {
+          _id: item.id,
+          title: item.title,
+          price: item.price,
+          duration: duration,
+        },
+        memberId: member.id,
+        payments: {
+          proofPayment: `images/${req.file.filename}`,
+          bankFrom: bankFrom,
+          accountHolder: accountHolder,
+        },
+      };
+
+      const booking = await Booking.create(newBooking);
+
+      res.status(201).json({ message: "Success booking", booking });
     }
   },
 };
