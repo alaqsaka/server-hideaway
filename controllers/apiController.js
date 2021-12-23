@@ -98,6 +98,10 @@ module.exports = {
         bank,
         testimonial,
       });
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).json({
+        message: "Internal server error",
+      });
+    }
   },
 };
