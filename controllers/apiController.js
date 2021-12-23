@@ -104,4 +104,42 @@ module.exports = {
       });
     }
   },
+
+  bookingPage: async (req, res) => {
+    const {
+      idItem,
+      duration,
+      // price,
+      bookingStartDate,
+      bookingEndDate,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      accountHolder,
+      bankFrom,
+    } = req.body;
+
+    if (!req.file) {
+      return res.status(404).json({ message: "Image not found" });
+    }
+
+    if (
+      idItem === undefined ||
+      duration === undefined ||
+      // price === undefined ||
+      bookingStartDate === undefined ||
+      bookingEndDate === undefined ||
+      firstName === undefined ||
+      lastName === undefined ||
+      email === undefined ||
+      phoneNumber === undefined ||
+      accountHolder === undefined ||
+      bankFrom === undefined
+    ) {
+      res.status(404).json({ message: "Lengkapi semua field" });
+    } else {
+      res.status(201).json({ message: "Success booking" });
+    }
+  },
 };
