@@ -8,7 +8,6 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const dotenv = require("dotenv");
 dotenv.config();
-console.log(process.env);
 const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASS;
 

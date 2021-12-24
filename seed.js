@@ -2,7 +2,6 @@ var seeder = require("mongoose-seed");
 var mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
-console.log(process.env);
 const username = process.env.MONGODB_USERNAME;
 const password = process.env.MONGODB_PASS;
 
