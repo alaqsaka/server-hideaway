@@ -6,10 +6,16 @@ var logger = require("morgan");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
+const dotenv = require("dotenv");
+dotenv.config();
+console.log(process.env);
+const username = process.env.MONGODB_USERNAME;
+const password = process.env.MONGODB_PASS;
+
 // import mongoose
 const mongoose = require("mongoose");
 mongoose.connect(
-  `mongodb+srv://aqsaka:aqsa1506@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
+  `mongodb+srv://${username}:${password}@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

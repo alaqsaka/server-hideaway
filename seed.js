@@ -1,9 +1,14 @@
 var seeder = require("mongoose-seed");
 var mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
+console.log(process.env);
+const username = process.env.MONGODB_USERNAME;
+const password = process.env.MONGODB_PASS;
 
 // Connect to MongoDB via Mongoose
 seeder.connect(
-  "mongodb+srv://aqsaka:aqsa1506@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority",
+  `mongodb+srv://${username}:${password}@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -93,7 +98,7 @@ var data = [
       // Tabby Town
       {
         _id: mongoose.Types.ObjectId("5e96cbe292b97300fc902222"),
-        title: "Tabby Town",
+        title: "Icebox Town",
         price: 12,
         sumBooking: 1,
         country: "Indonesia",
