@@ -7,7 +7,7 @@ const password = process.env.MONGODB_PASS;
 
 // Connect to MongoDB via Mongoose
 seeder.connect(
-  `mongodb+srv://${username}:${password}@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
+  `mongodb+srv://aqsaka:aqsa1506@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useCreateIndex: true,

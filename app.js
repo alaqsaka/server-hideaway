@@ -14,7 +14,7 @@ const password = process.env.MONGODB_PASS;
 // import mongoose
 const mongoose = require("mongoose");
 mongoose.connect(
-  `mongodb+srv://${username}:${password}@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
+  `mongodb+srv://aqsaka:aqsa1506@cluster0.buhko.mongodb.net/db_hideaway?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
