@@ -8,8 +8,6 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const dotenv = require("dotenv");
 dotenv.config();
-const username = process.env.MONGODB_USERNAME;
-const password = process.env.MONGODB_PASS;
 
 // import mongoose
 const mongoose = require("mongoose");
@@ -34,16 +32,29 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+app.all("*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "URLs to trust of allow");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
-  next();
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  if ("OPTIONS" == req.method) {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
 });
+// app.use(function (req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Credentials", "true");
+//   res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+//   );
+//   next();
+// });
 app.use(logger("dev"));
 app.use(methodOverride("_method"));
 app.use(
