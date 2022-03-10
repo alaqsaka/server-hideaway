@@ -20,7 +20,7 @@ module.exports = {
       if (req.session.user == null || req.session.user == undefined) {
         res.render("index", {
           alert,
-          title: "Staycation | Login",
+          title: "Hideaway | Login",
         });
       } else {
         res.redirect("/admin/dashboard");
@@ -69,7 +69,7 @@ module.exports = {
       const booking = await Booking.find();
       const item = await Item.find();
       res.render("admin/dashboard/view_dashboard.ejs", {
-        title: "Staycation | Dashboard",
+        title: "Hideaway | Dashboard",
         user: req.session.user,
         member,
         booking,
@@ -88,7 +88,7 @@ module.exports = {
       res.render("admin/category/view_category.ejs", {
         category,
         alert,
-        title: "Staycation | Category",
+        title: "Hideaway | Category",
         user: req.session.user,
       });
     } catch (error) {
@@ -144,7 +144,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render("admin/bank/view_bank.ejs", {
-        title: "Staycation | Bank",
+        title: "Hideaway | Bank",
         alert,
         bank,
         user: req.session.user,
@@ -223,7 +223,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render("admin/item/view_item", {
-        title: "Staycation | Item",
+        title: "Hideaway | Item",
         category,
         alert,
         item,
@@ -279,7 +279,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render("admin/item/view_item", {
-        title: "Staycation | Show Image Item",
+        title: "Hideaway | Show Image Item",
         alert,
         item,
         action: "show image",
@@ -305,7 +305,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render("admin/item/view_item", {
-        title: "Staycation | Edit Item",
+        title: "Hideaway | Edit Item",
         alert,
         item,
         category,
